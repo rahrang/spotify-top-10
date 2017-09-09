@@ -1,2 +1,2 @@
-# SixDegreesOfSpotify
-This application will take two musical artists and provide the degrees of separation between them using Spotify's API. The app will also return the tracks used to create the link between the artists.
+# SpotifyTop10
+This application will track the top 10 Spotify tracks in the United States over an extended period of time through a daily manual backend request. It will graph ranking info and make requests for more data when users specify.
