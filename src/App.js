@@ -1,3 +1,9 @@
+/***
+ * Six Degrees of Spotify
+ * This is the entry point of the app.
+ * author: @rahrang
+*/
+
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 

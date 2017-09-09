@@ -4,10 +4,12 @@
   "private": true,
   "dependencies": {
     "aphrodite": "^1.2.3",
+    "moment": "^2.18.1",
     "prettier": "^1.6.1",
     "react": "^15.6.1",
     "react-dom": "^15.6.1",
     "react-scripts": "1.0.12",
+    "request": "^2.81.0",
     "yargs": "^8.0.2"
   },
   "scripts": {
