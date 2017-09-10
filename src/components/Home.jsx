@@ -7,7 +7,10 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-import spotify_client_id from '../client/config.js';
+const dataFile = require('../client/daily_data/09_09_2017.json');
+
+const dataFolder = require('../client/daily_data/09_09_2017.json');
+console.log(dataFolder);
 
 class Home extends React.Component {
 
@@ -15,6 +18,7 @@ class Home extends React.Component {
     return (
       <div className="home-container">
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
+        <h2> {dataFile.items[0].track.album.images[0].url} </h2>
       </div>
     );
   }
