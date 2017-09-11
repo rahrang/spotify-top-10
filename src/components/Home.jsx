@@ -15,9 +15,13 @@ import { css, StyleSheet } from 'aphrodite';
 // Action File
 import { MainActions } from '../actions/main-actions.js';
 
+// Local Components
+import TrackCard from './TrackCard.jsx';
+
 // Date Files
 const daily_dates = require('../client/daily_dates.json');
 const weekly_dates = require('../client/weekly_dates.json');
+
 
 class Home extends React.Component {
   constructor(props) {
@@ -57,10 +61,20 @@ class Home extends React.Component {
   }
 
   render() {
+
+    let { main } = this.props;
+
+    const date = main.dailyDates[0];
+    var dateInfo = main.dailyInfo[date];
+    if (dateInfo) {
+      console.log(dateInfo.items);
+    }
+
     return (
       <div className="home-container">
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        <h2>{this.props.main.dailyDates[0]}</h2>
+        <h2>{date}</h2>
+        <TrackCard date={date} dateInfo={dateInfo ? dateInfo.items[0] : null} />
       </div>
     );
   }
