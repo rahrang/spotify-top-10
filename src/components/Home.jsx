@@ -60,12 +60,21 @@ class Home extends React.Component {
     this.props.mainActions.storeData(dailyDates, weeklyDates, dailyInfo, weeklyInfo);
   }
 
+  formatRank = (index) => {
+    if (index < 9) {
+      return `0${index + 1}`
+    } else {
+      return `${index + 1}`
+    }
+  }
+
   render() {
 
     let { main } = this.props;
 
     const date = main.dailyDates[0];
     var dateInfo = main.dailyInfo[date];
+
     if (dateInfo) {
       console.log(dateInfo.items);
     }
@@ -74,7 +83,11 @@ class Home extends React.Component {
       <div className="home-container">
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
         <h2>{date}</h2>
-        <TrackCard date={date} dateInfo={dateInfo ? dateInfo.items[0] : null} />
+        <TrackCard
+          date={date}
+          dateInfo={dateInfo ? dateInfo.items[0] : null}
+          rank={this.formatRank(9)} // rank should always be 1 more than index (this will be the index+1 when we map over the dateInfo.items)
+        />
       </div>
     );
   }
