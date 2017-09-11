@@ -58,20 +58,10 @@ class Home extends React.Component {
 
   render() {
 
-    // console.log('---')
-    // console.log(this.props.main);
-    // console.log('---')
-
-    // find ways to push this to Redux store in ComponentDidMount
-    for (var i = 0; i < daily_dates.length; i++) {
-      var dateFile = require(`../client/daily_data/${daily_dates[i]}.json`);
-      // console.log(dateFile);
-    }
-
     return (
       <div className="home-container">
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        <h2></h2>
+        <h2>{this.props.main.dailyDates[0]}</h2>
       </div>
     );
   }
