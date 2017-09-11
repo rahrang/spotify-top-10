@@ -57,9 +57,6 @@ class Home extends React.Component {
   }
 
   render() {
-
-    console.log(this.props.main);
-
     return (
       <div className="home-container">
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
