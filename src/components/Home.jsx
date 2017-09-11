@@ -5,7 +5,11 @@
 */
 
 import React from 'react';
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { css, StyleSheet } from 'aphrodite';
+
+import { MainActions } from '../actions/main-actions.js';
 
 const helpers = require('../client/helpers.js');
 
@@ -15,8 +19,9 @@ class Home extends React.Component {
 
   render() {
 
-    console.log(daily_dates);
-
+    console.log('---')
+    console.log(this.props.main);
+    console.log('---')
 
     // find ways to push this to Redux store in ComponentDidMount
     for (var i = 0; i < daily_dates.length; i++) {
@@ -33,7 +38,19 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return ({
+    main: state.main,
+  });
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return ({
+    mainActions: bindActionCreators(MainActions, dispatch),
+  });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
 
