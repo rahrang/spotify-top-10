@@ -17,8 +17,44 @@ import { MainActions } from '../actions/main-actions.js';
 
 // Date Files
 const daily_dates = require('../client/daily_dates.json');
+const weekly_dates = require('../client/weekly_dates.json');
 
 class Home extends React.Component {
+  constructor(props) {
+    super(props);
+    this.state = {
+      view: 'weekly',
+    }
+  }
+
+  componentDidMount() {
+    this.collectAllData();
+  }
+
+  collectData = (type) => {
+    let data = {};
+    let arr = [];
+    if (type === 'daily_data') {
+      arr = daily_dates;
+    } else if (type === 'weekly_data') {
+      arr = weekly_dates;
+    }
+    arr.forEach((file) => {
+      var dateFile = require(`../client/${type}/${file}.json`);
+      data[file] = dateFile;
+    })
+    return data;
+  }
+
+  collectAllData = () => {
+    const dailyInfo = this.collectData('daily_data');
+    const weeklyInfo = this.collectData('weekly_data');
+    this.addDataToStore(daily_dates, weekly_dates, dailyInfo, weeklyInfo);
+  }
+
+  addDataToStore = (dailyDates, weeklyDates, dailyInfo, weeklyInfo) => {
+    this.props.mainActions.storeData(dailyDates, weeklyDates, dailyInfo, weeklyInfo);
+  }
 
   render() {
 
