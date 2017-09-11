@@ -9,7 +9,8 @@ const defaultState = {
 
 const MainReducer = (state = defaultState, action) => {
   switch (action.type) {
-    // add cases here
+    case MainConstants.STORE_DATA:
+        return {...state, ...action}
     default:
       return state;
   }
