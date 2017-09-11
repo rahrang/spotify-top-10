@@ -7,13 +7,13 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-var dates = require('../client/data_grabber.js');
+const helpers = require('../client/helpers.js');
 
 class Home extends React.Component {
 
   render() {
 
-    console.log(JSON.parse(dates.getDatesArray('../client/daily_dates.json')));
+    console.log(helpers.getDates('daily_dates.json'));
 
     return (
       <div className="home-container">
