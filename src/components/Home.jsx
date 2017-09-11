@@ -4,29 +4,32 @@
  * author: @rahrang
 */
 
+// React
 import React from 'react';
+
+// NPM Modules
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { css, StyleSheet } from 'aphrodite';
 
+// Action File
 import { MainActions } from '../actions/main-actions.js';
 
-const helpers = require('../client/helpers.js');
-
+// Date Files
 const daily_dates = require('../client/daily_dates.json');
 
 class Home extends React.Component {
 
   render() {
 
-    console.log('---')
-    console.log(this.props.main);
-    console.log('---')
+    // console.log('---')
+    // console.log(this.props.main);
+    // console.log('---')
 
     // find ways to push this to Redux store in ComponentDidMount
     for (var i = 0; i < daily_dates.length; i++) {
       var dateFile = require(`../client/daily_data/${daily_dates[i]}.json`);
-      console.log(dateFile);
+      // console.log(dateFile);
     }
 
     return (
