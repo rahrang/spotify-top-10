@@ -7,18 +7,18 @@
 import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 
-const dataFile = require('../client/daily_data/09_09_2017.json');
-
-const dataFolder = require('../client/daily_data/09_09_2017.json');
-console.log(dataFolder);
+var dates = require('../client/data_grabber.js');
 
 class Home extends React.Component {
 
   render() {
+
+    console.log(JSON.parse(dates.getDatesArray('../client/daily_dates.json')));
+
     return (
       <div className="home-container">
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        <h2> {dataFile.items[0].track.album.images[0].url} </h2>
+        <h2></h2>
       </div>
     );
   }
