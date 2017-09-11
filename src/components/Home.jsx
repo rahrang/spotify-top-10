@@ -4,24 +4,32 @@
  * author: @rahrang
 */
 
+// React
 import React from 'react';
+
+// NPM Modules
+import { connect } from 'react-redux';
+import { bindActionCreators } from 'redux';
 import { css, StyleSheet } from 'aphrodite';
 
-const helpers = require('../client/helpers.js');
+// Action File
+import { MainActions } from '../actions/main-actions.js';
 
+// Date Files
 const daily_dates = require('../client/daily_dates.json');
 
 class Home extends React.Component {
 
   render() {
 
-    console.log(daily_dates);
-
+    // console.log('---')
+    // console.log(this.props.main);
+    // console.log('---')
 
     // find ways to push this to Redux store in ComponentDidMount
     for (var i = 0; i < daily_dates.length; i++) {
       var dateFile = require(`../client/daily_data/${daily_dates[i]}.json`);
-      console.log(dateFile);
+      // console.log(dateFile);
     }
 
     return (
@@ -33,7 +41,19 @@ class Home extends React.Component {
   }
 }
 
-export default Home;
+const mapStateToProps = (state) => {
+  return ({
+    main: state.main,
+  });
+};
+
+const mapDispatchToProps = (dispatch, ownProps) => {
+  return ({
+    mainActions: bindActionCreators(MainActions, dispatch),
+  });
+};
+
+export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
 
