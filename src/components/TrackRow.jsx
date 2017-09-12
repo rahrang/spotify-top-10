@@ -98,8 +98,9 @@ const styles = StyleSheet.create({
   trackRow: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'top',
     justifyContent: 'center',
+    margin: '15px 0', // keep this when margin offsets on TrackCards are commented out
     width: '100%',
   },
 
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '75px 0 0',
+    margin: '100px 0 0',
     padding: '0 10px',
   },
 

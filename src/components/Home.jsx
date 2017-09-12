@@ -32,7 +32,7 @@ class Home extends React.Component {
     this.state = {
       activeID: -1,
       activeTrackInfo: {},
-      isModalOpen: true,
+      isModalOpen: false,
       view: 'daily',
     }
 

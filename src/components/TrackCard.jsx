@@ -66,18 +66,19 @@ export default class TrackCard extends React.Component {
         className={css(
           styles.trackCard,
           !active && styles.inactive,
-          rank === '02' && marginOffsets.two,
-          rank === '03' && marginOffsets.three,
-          rank === '04' && marginOffsets.four,
-          rank === '05' && marginOffsets.five,
-          rank === '06' && marginOffsets.six,
-          rank === '07' && marginOffsets.seven,
-          rank === '08' && marginOffsets.eight,
-          rank === '09' && marginOffsets.nine,
-          rank === '10' && marginOffsets.ten
+          // rank === '02' && marginOffsets.two,
+          // rank === '03' && marginOffsets.three,
+          // rank === '04' && marginOffsets.four,
+          // rank === '05' && marginOffsets.five,
+          // rank === '06' && marginOffsets.six,
+          // rank === '07' && marginOffsets.seven,
+          // rank === '08' && marginOffsets.eight,
+          // rank === '09' && marginOffsets.nine,
+          // rank === '10' && marginOffsets.ten
         )}
-        onClick={(e) => setActiveID(e, trackID)}
-        onDoubleClick={(e) => openModal(e, this.state)}
+        onMouseOver={(e) => setActiveID(e, trackID)}
+        onMouseLeave={(e) => setActiveID(e, -1)}
+        onClick={(e) => openModal(e, this.state)}
       >
         <div className={css(styles.rank)}> { rank } </div>
         <img
@@ -96,6 +97,7 @@ export default class TrackCard extends React.Component {
 const styles = StyleSheet.create({
 
   trackCard: {
+    cursor: 'pointer',
     display: 'flex',
     flexDirection: 'column',
     margin: '0 2px',
