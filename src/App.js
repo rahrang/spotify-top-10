@@ -24,11 +24,11 @@ export default App;
 const styles = StyleSheet.create({
 
   app: {
-    backgroundColor: '#303030',
     fontSize: '100%',
     margin: '0',
     padding: '0',
     minHeight: '100vh',
+    width: '100%',
   }
 
 })

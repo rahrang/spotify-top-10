@@ -48,9 +48,8 @@ export default class TrackRow extends React.Component {
   formatRank = (index) => {
     if (index < 9) {
       return `0${index + 1}`
-    } else {
-      return `${index + 1}`
     }
+    return `${index + 1}`
   }
 
   formatDate = (dateString) => {
@@ -66,7 +65,7 @@ export default class TrackRow extends React.Component {
   render() {
 
     let { dateInfo, activeID, setActiveID } = this.props;
-    let { date, trackName, imageSrc } = this.state;
+    let { date } = this.state;
     
     if (!dateInfo) {
       return null;
@@ -106,6 +105,7 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    margin: '15px 0',
     width: '100%',
   },
 

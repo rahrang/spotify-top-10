@@ -63,8 +63,13 @@ class Home extends React.Component {
     this.props.mainActions.storeData(dailyDates, weeklyDates, dailyInfo, weeklyInfo);
   }
 
-  setActiveID = (id) => {
+  setActiveID = (e, id) => {
+    e.stopPropagation();
     this.setState({activeID: id});
+  }
+
+  resetActiveID = (e) => {
+    this.setState({activeID: -1});
   }
 
   render() {
@@ -89,7 +94,9 @@ class Home extends React.Component {
     });
 
     return (
-      <div className={css(styles.homeContainer)}>
+      <div className={css(styles.homeContainer)}
+        onClick={(e) => this.resetActiveID(e)}
+      >
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
         { trackRows }
       </div>
@@ -114,7 +121,7 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 const styles = StyleSheet.create({
 
   homeContainer: {
-    overflowX: 'scroll',
+    backgroundColor: '#222222',
   },
 
   header: {

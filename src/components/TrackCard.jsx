@@ -64,7 +64,7 @@ export default class TrackCard extends React.Component {
     return (
       <div
         className={css(styles.trackCard, !active && styles.inactive)}
-        onClick={() => setActiveID(trackID)}
+        onClick={(e) => setActiveID(e, trackID)}
       >
         <div className={css(styles.rank)}> { rank } </div>
         <img
@@ -85,12 +85,12 @@ const styles = StyleSheet.create({
   trackCard: {
     display: 'flex',
     flexDirection: 'column',
-    // margin: '0 5px',
-    width: '135px', // use media queries to change these based on screen width
+    margin: '0 2px',
+    width: '125px', // use media queries to change these based on screen width
   },
 
   inactive: {
-    opacity: '0.25',
+    opacity: '0.15',
   },
 
   rank: {
@@ -98,20 +98,20 @@ const styles = StyleSheet.create({
     fontFamily: 'Oswald, sans-serif',
     fontSize: '2.5em',
     fontWeight: 'bold',
-    padding: '10px 0',
+    padding: '0 0 5px 0',
     textAlign: 'center',
   },
 
   trackImage: {
-    height: '135px', // use media queries to change these based on screen width
-    width: '135px',
+    height: '125px', // use media queries to change these based on screen width
+    width: '125px',
   },
 
   trackTitle: {
     backgroundColor: '#000',
     color: '#FFF',
     fontFamily: 'Oswald, sans-serif',
-    fontSize: '0.675em',
+    fontSize: '0.625em',
     letterSpacing: '0.0125em',
     padding: '4px 0 4px 4px',
     textTransform: 'uppercase',
