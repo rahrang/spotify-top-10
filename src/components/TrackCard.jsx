@@ -1,6 +1,6 @@
 /***
  * Six Degrees of Spotify
- * This is the main page of the app.
+ * This is an individual track in each TrackRow.
  * author: @rahrang
 */
 

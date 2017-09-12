@@ -1,13 +1,7 @@
 /***
  * Six Degrees of Spotify
- * This is the main page of the app.
+ * This is the row of tracks corresponding to each day.
  * author: @rahrang
-*/
-
-/*
-  - pass date (as FileName), dateInfo, activeID boolean into TrackRow
-  - pass individual date from dateInfo, activeID boolean into TrackCard
-  - componentWillReceiveProps of TrackCard should handle hover/click changes
 */
 
 // React
