@@ -1,13 +1,5 @@
 export const MainConstants = {
-    STORE_DATA: "STORE_DATA",
-};
-
-let store_data = (dailyDates, weeklyDates, dailyInfo, weeklyInfo) => {
-    type: MainConstants.STORE_DATA,
-    dailyDates,
-    weeklyDates,
-    dailyInfo,
-    weeklyInfo
+    STORE_DATA: "STORE_DATA"
 };
 
 export const MainActions = {
@@ -18,5 +10,5 @@ export const MainActions = {
         weeklyDates,
         dailyInfo,
         weeklyInfo
-    }),
+    })
 };

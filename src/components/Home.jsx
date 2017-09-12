@@ -15,15 +15,22 @@ import { css, StyleSheet } from 'aphrodite';
 // Action File
 import { MainActions } from '../actions/main-actions.js';
 
+// Local Components
+import TrackRow from './TrackRow.jsx';
+
 // Date Files
 const daily_dates = require('../client/daily_dates.json');
 const weekly_dates = require('../client/weekly_dates.json');
+
+const _ = require('lodash');
+
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'weekly',
+      view: 'daily',
+      activeID: -1,
     }
   }
 
@@ -56,11 +63,42 @@ class Home extends React.Component {
     this.props.mainActions.storeData(dailyDates, weeklyDates, dailyInfo, weeklyInfo);
   }
 
+  setActiveID = (e, id) => {
+    e.stopPropagation();
+    this.setState({activeID: id});
+  }
+
+  resetActiveID = (e) => {
+    this.setState({activeID: -1});
+  }
+
   render() {
+
+    let { main } = this.props;
+    let { activeID } = this.state;
+
+    if (_.isEmpty(main.dailyInfo)) {
+      return null;
+    }
+
+    var trackRows = daily_dates.map((date, index) => {
+      return (
+        <TrackRow
+          key={date}
+          date={date}
+          dateInfo={main.dailyInfo[date].items}
+          activeID={activeID}
+          setActiveID={this.setActiveID}
+        />
+      )
+    });
+
     return (
-      <div className="home-container">
+      <div className={css(styles.homeContainer)}
+        onClick={(e) => this.resetActiveID(e)}
+      >
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        <h2>{this.props.main.dailyDates[0]}</h2>
+        { trackRows }
       </div>
     );
   }
@@ -82,13 +120,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
 
-    header: {
-        color: '#FFF',
-        fontFamily: 'Raleway, sans-serif',
-        fontSize: '1.5em',
-        fontWeight: '500',
-        margin: '0',
-        padding: '10px',
-    }
+  homeContainer: {
+    backgroundColor: '#222222',
+  },
+
+  header: {
+    color: '#FFF',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '1.5em',
+    fontWeight: '500',
+    margin: '0',
+    padding: '10px',
+  }
 
 })
