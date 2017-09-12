@@ -12,7 +12,7 @@ var addDate = (file, date) => {
         return [];
     }
 
-    dates.push(date);
+    dates.unshift(date);
     fs.writeFileSync(file, JSON.stringify(dates));
 }
 

@@ -26,15 +26,15 @@ export default class TrackCard extends React.Component {
   }
 
   componentDidMount() {
-    let { dateInfo } = this.props;
-    if (dateInfo) {
-      this.parseInfo(dateInfo.track);
+    let { trackInfo } = this.props;
+    if (trackInfo) {
+      this.parseInfo(trackInfo.track);
     }
   }
 
   componentWillReceiveProps(nextProps) {
-    if (nextProps.dateInfo !== this.props.dateInfo) {
-      this.parseInfo(nextProps.dateInfo.track);
+    if (nextProps.trackInfo !== this.props.trackInfo) {
+      this.parseInfo(nextProps.trackInfo.track);
     }
   }
 
@@ -54,15 +54,18 @@ export default class TrackCard extends React.Component {
 
   render() {
 
-    let { dateInfo, rank } = this.props;
-    let { trackName, imageSrc } = this.state;
+    let { trackInfo, rank, setActiveID, active } = this.props;
+    let { trackName, imageSrc, trackID } = this.state;
     
-    if (!dateInfo) {
+    if (!trackInfo) {
       return null;
     }
 
     return (
-      <div className={css(styles.trackCard)}>
+      <div
+        className={css(styles.trackCard, !active && styles.inactive)}
+        onClick={() => setActiveID(trackID)}
+      >
         <div className={css(styles.rank)}> { rank } </div>
         <img
           className={css(styles.trackImage)}
@@ -82,12 +85,17 @@ const styles = StyleSheet.create({
   trackCard: {
     display: 'flex',
     flexDirection: 'column',
-    width: '150px', // use media queries to change these based on screen width
+    // margin: '0 5px',
+    width: '135px', // use media queries to change these based on screen width
+  },
+
+  inactive: {
+    opacity: '0.25',
   },
 
   rank: {
     color: '#FFF',
-    fontFamily: 'Raleway, sans-serif',
+    fontFamily: 'Oswald, sans-serif',
     fontSize: '2.5em',
     fontWeight: 'bold',
     padding: '10px 0',
@@ -95,15 +103,15 @@ const styles = StyleSheet.create({
   },
 
   trackImage: {
-    height: '150px', // use media queries to change these based on screen width
-    width: '150px',
+    height: '135px', // use media queries to change these based on screen width
+    width: '135px',
   },
 
   trackTitle: {
     backgroundColor: '#000',
     color: '#FFF',
     fontFamily: 'Oswald, sans-serif',
-    fontSize: '0.75em',
+    fontSize: '0.675em',
     letterSpacing: '0.0125em',
     padding: '4px 0 4px 4px',
     textTransform: 'uppercase',

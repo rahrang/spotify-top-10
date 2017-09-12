@@ -16,18 +16,21 @@ import { css, StyleSheet } from 'aphrodite';
 import { MainActions } from '../actions/main-actions.js';
 
 // Local Components
-import TrackCard from './TrackCard.jsx';
+import TrackRow from './TrackRow.jsx';
 
 // Date Files
 const daily_dates = require('../client/daily_dates.json');
 const weekly_dates = require('../client/weekly_dates.json');
+
+const _ = require('lodash');
 
 
 class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'weekly',
+      view: 'daily',
+      activeID: -1,
     }
   }
 
@@ -60,34 +63,35 @@ class Home extends React.Component {
     this.props.mainActions.storeData(dailyDates, weeklyDates, dailyInfo, weeklyInfo);
   }
 
-  formatRank = (index) => {
-    if (index < 9) {
-      return `0${index + 1}`
-    } else {
-      return `${index + 1}`
-    }
+  setActiveID = (id) => {
+    this.setState({activeID: id});
   }
 
   render() {
 
     let { main } = this.props;
+    let { activeID } = this.state;
 
-    const date = main.dailyDates[0];
-    var dateInfo = main.dailyInfo[date];
-
-    if (dateInfo) {
-      console.log(dateInfo.items);
+    if (_.isEmpty(main.dailyInfo)) {
+      return null;
     }
 
-    return (
-      <div className="home-container">
-        <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        <h2>{date}</h2>
-        <TrackCard
+    var trackRows = daily_dates.map((date, index) => {
+      return (
+        <TrackRow
+          key={date}
           date={date}
-          dateInfo={dateInfo ? dateInfo.items[0] : null}
-          rank={this.formatRank(9)} // rank should always be 1 more than index (this will be the index+1 when we map over the dateInfo.items)
+          dateInfo={main.dailyInfo[date].items}
+          activeID={activeID}
+          setActiveID={this.setActiveID}
         />
+      )
+    });
+
+    return (
+      <div className={css(styles.homeContainer)}>
+        <h1 className={css(styles.header)}>Spotify Top 10</h1>
+        { trackRows }
       </div>
     );
   }
@@ -109,13 +113,17 @@ export default connect(mapStateToProps, mapDispatchToProps)(Home);
 
 const styles = StyleSheet.create({
 
-    header: {
-        color: '#FFF',
-        fontFamily: 'Raleway, sans-serif',
-        fontSize: '1.5em',
-        fontWeight: '500',
-        margin: '0',
-        padding: '10px',
-    }
+  homeContainer: {
+    overflowX: 'scroll',
+  },
+
+  header: {
+    color: '#FFF',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '1.5em',
+    fontWeight: '500',
+    margin: '0',
+    padding: '10px',
+  }
 
 })
