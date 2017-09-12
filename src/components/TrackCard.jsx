@@ -63,7 +63,19 @@ export default class TrackCard extends React.Component {
 
     return (
       <div
-        className={css(styles.trackCard, !active && styles.inactive)}
+        className={css(
+          styles.trackCard,
+          !active && styles.inactive,
+          rank === '02' && marginOffsets.two,
+          rank === '03' && marginOffsets.three,
+          rank === '04' && marginOffsets.four,
+          rank === '05' && marginOffsets.five,
+          rank === '06' && marginOffsets.six,
+          rank === '07' && marginOffsets.seven,
+          rank === '08' && marginOffsets.eight,
+          rank === '09' && marginOffsets.nine,
+          rank === '10' && marginOffsets.ten
+        )}
         onClick={(e) => setActiveID(e, trackID)}
         onDoubleClick={(e) => openModal(e, this.state)}
       >
@@ -97,7 +109,7 @@ const styles = StyleSheet.create({
   rank: {
     color: '#FFF',
     fontFamily: 'Oswald, sans-serif',
-    fontSize: '2.5em',
+    fontSize: '2.25em',
     fontWeight: 'bold',
     padding: '0 0 5px 0',
     textAlign: 'center',
@@ -117,5 +129,45 @@ const styles = StyleSheet.create({
     padding: '4px 0 4px 4px',
     textTransform: 'uppercase',
   }
+
+});
+
+const marginOffsets = StyleSheet.create({
+
+  two: {
+    marginTop: '10px',
+  },
+
+  three: {
+    marginTop: '20px',
+  },
+
+  four: {
+    marginTop: '30px',
+  },
+
+  five: {
+    marginTop: '40px',
+  },
+
+  six: {
+    marginTop: '50px',
+  },
+
+  seven: {
+    marginTop: '60px',
+  },
+
+  eight: {
+    marginTop: '70px',
+  },
+
+  nine: {
+    marginTop: '80px',
+  },
+
+  ten: {
+    marginTop: '90px',
+  },
 
 })

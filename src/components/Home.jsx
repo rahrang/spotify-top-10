@@ -99,18 +99,28 @@ class Home extends React.Component {
   render() {
 
     let { main } = this.props;
-    let { activeID, isModalOpen } = this.state;
+    let { activeID, isModalOpen, view } = this.state;
 
     if (_.isEmpty(main.dailyInfo)) {
       return null;
     }
 
-    var trackRows = daily_dates.map((date, index) => {
+    let dataArray = [];
+    let dates = [];
+    if (view === 'weekly') {
+      dataArray = main.weeklyInfo;
+      dates = weekly_dates;
+    } else if (view === 'daily') {
+      dataArray = main.dailyInfo;
+      dates = daily_dates;
+    }
+
+    var trackRows = dates.map((date, index) => {
       return (
         <TrackRow
           key={date}
           date={date}
-          dateInfo={main.dailyInfo[date].items}
+          dateInfo={dataArray[date].items}
           activeID={activeID}
           setActiveID={this.setActiveID}
           openModal={this.openModal}
@@ -122,8 +132,26 @@ class Home extends React.Component {
       <div className={css(styles.homeContainer)}
         onClick={(e) => this.resetActiveID(e)}
       >
-        <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        { trackRows }
+        <div className={css(styles.headerContainer)}>
+          <h1 className={css(styles.header)}>Spotify Top 10</h1>
+          <div className={css(styles.selectionContainer)}>
+            <button
+              className={css(styles.selection, view === 'daily' && styles.activeSelection)}
+              onClick={() => this.setState({view: 'daily'})}
+            >
+              Daily
+            </button>
+            <button
+              className={css(styles.selection, view === 'weekly' && styles.activeSelection)}
+              onClick={() => this.setState({view: 'weekly'})}
+            >
+              Weekly
+            </button>
+          </div>
+        </div>
+        <div className={css(styles.trackRowContainer)}>
+          { trackRows }
+        </div>
         <TrackModal
           isOpen={isModalOpen}
           onRequestClose={this.closeModal}
@@ -152,10 +180,16 @@ const styles = StyleSheet.create({
 
   homeContainer: {
     backgroundColor: '#222222',
-    // display: 'flex',
-    // flexDirection: 'column',
-    // alignItems: 'center',
-    // justifyContent: 'center',
+    minHeight: '100vh',
+    padding: '20px 0',
+  },
+
+  headerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'bottom',
+    justifyContent: 'space-between',
+    padding: '10px 20px',
   },
 
   header: {
@@ -164,7 +198,35 @@ const styles = StyleSheet.create({
     fontSize: '1.5em',
     fontWeight: '500',
     margin: '0',
-    padding: '10px',
+    padding: '0',
   },
+
+  selectionContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+  },
+
+  selection: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    border: 'none',
+    color: '#FFF',
+    cursor: 'pointer',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '1em',
+    letterSpacing: '0.025em',
+    outline: 'none',
+    margin: '0 5px',
+    padding: '0 5px',
+    textTransform: 'uppercase',
+  },
+
+  activeSelection: {
+    borderBottom: '2px solid #FFF',
+  },
+
+  trackRowContainer: {
+    padding: '40px 0',
+  }
 
 })

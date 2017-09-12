@@ -20,8 +20,6 @@ export default class TrackModal extends React.Component {
 
     let { isOpen, onRequestClose, trackInfo } = this.props;
 
-    console.log(trackInfo);
-
     return (
       <Modal
         isOpen={isOpen}
