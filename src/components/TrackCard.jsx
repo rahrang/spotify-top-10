@@ -54,7 +54,7 @@ export default class TrackCard extends React.Component {
 
   render() {
 
-    let { trackInfo, rank, setActiveID, active } = this.props;
+    let { trackInfo, rank, setActiveID, active, openModal } = this.props;
     let { trackName, imageSrc, trackID } = this.state;
     
     if (!trackInfo) {
@@ -65,6 +65,7 @@ export default class TrackCard extends React.Component {
       <div
         className={css(styles.trackCard, !active && styles.inactive)}
         onClick={(e) => setActiveID(e, trackID)}
+        onDoubleClick={(e) => openModal(e, this.state)}
       >
         <div className={css(styles.rank)}> { rank } </div>
         <img

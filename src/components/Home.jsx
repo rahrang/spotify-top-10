@@ -17,6 +17,7 @@ import { MainActions } from '../actions/main-actions.js';
 
 // Local Components
 import TrackRow from './TrackRow.jsx';
+import TrackModal from './TrackModal.jsx';
 
 // Date Files
 const daily_dates = require('../client/daily_dates.json');
@@ -29,9 +30,15 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'daily',
       activeID: -1,
+      activeTrackInfo: {},
+      isModalOpen: true,
+      view: 'daily',
     }
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+
   }
 
   componentDidMount() {
@@ -72,10 +79,27 @@ class Home extends React.Component {
     this.setState({activeID: -1});
   }
 
+  openModal = (e, trackInfo) => {
+    e.stopPropagation();
+    console.log('track', trackInfo);
+    this.setState({
+      isModalOpen: true,
+      activeTrackInfo: trackInfo,
+    });
+  }
+
+  closeModal = (e) => {
+    e.stopPropagation();
+    this.setState({
+      isModalOpen: false,
+      activeTrackInfo: {},
+    })
+  }
+
   render() {
 
     let { main } = this.props;
-    let { activeID } = this.state;
+    let { activeID, isModalOpen } = this.state;
 
     if (_.isEmpty(main.dailyInfo)) {
       return null;
@@ -89,6 +113,7 @@ class Home extends React.Component {
           dateInfo={main.dailyInfo[date].items}
           activeID={activeID}
           setActiveID={this.setActiveID}
+          openModal={this.openModal}
         />
       )
     });
@@ -99,6 +124,11 @@ class Home extends React.Component {
       >
         <h1 className={css(styles.header)}>Spotify Top 10</h1>
         { trackRows }
+        <TrackModal
+          isOpen={isModalOpen}
+          onRequestClose={this.closeModal}
+          trackInfo={this.state.activeTrackInfo}
+        />
       </div>
     );
   }
@@ -122,6 +152,10 @@ const styles = StyleSheet.create({
 
   homeContainer: {
     backgroundColor: '#222222',
+    // display: 'flex',
+    // flexDirection: 'column',
+    // alignItems: 'center',
+    // justifyContent: 'center',
   },
 
   header: {
@@ -131,6 +165,6 @@ const styles = StyleSheet.create({
     fontWeight: '500',
     margin: '0',
     padding: '10px',
-  }
+  },
 
 })

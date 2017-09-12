@@ -58,7 +58,7 @@ export default class TrackRow extends React.Component {
 
   render() {
 
-    let { dateInfo, activeID, setActiveID } = this.props;
+    let { dateInfo, activeID, setActiveID, openModal } = this.props;
     let { date } = this.state;
     
     if (!dateInfo) {
@@ -74,6 +74,7 @@ export default class TrackRow extends React.Component {
           rank={this.formatRank(index)}
           setActiveID={setActiveID}
           trackInfo={track}
+          openModal={openModal}
         />
       )
     })
