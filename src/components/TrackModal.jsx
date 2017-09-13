@@ -10,7 +10,7 @@ import React from 'react';
 // NPM Modules
 import { css, StyleSheet } from 'aphrodite';
 import Modal from 'react-modal';
-import {LineChart, XAxis, YAxis, CartesianGrid} from 'recharts';
+// import {LineChart, XAxis, YAxis, CartesianGrid} from 'recharts';
 
 const _ = require('lodash');
 
@@ -65,6 +65,7 @@ export default class TrackModal extends React.Component {
                 {trackInfo.albumName}
               </h2>
             </div>
+            {/*
             <div className={css(styles.lineChart)}>
               <LineChart width={400} height={300} data={[{date: '1', rank: '1'}]}>
                 <XAxis dataKey='date' />
@@ -72,6 +73,7 @@ export default class TrackModal extends React.Component {
                 <CartesianGrid strokeDasharray="3 3" />
               </LineChart>
             </div>
+            */}
             <div className={css(styles.playerContainer)}>
               <iframe
                 title={trackInfo.trackName}
