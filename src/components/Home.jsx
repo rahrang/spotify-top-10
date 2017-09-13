@@ -81,7 +81,6 @@ class Home extends React.Component {
 
   openModal = (e, trackInfo) => {
     e.stopPropagation();
-    console.log('track', trackInfo);
     this.setState({
       isModalOpen: true,
       activeTrackInfo: trackInfo,

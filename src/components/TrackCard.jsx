@@ -100,7 +100,7 @@ const styles = StyleSheet.create({
     cursor: 'pointer',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 2px',
+    padding: '0 2px',
     width: '125px', // use media queries to change these based on screen width
   },
 
