@@ -20,8 +20,8 @@ import TrackRow from './TrackRow.jsx';
 import TrackModal from './TrackModal.jsx';
 
 // Date Files
-const daily_dates = require('../client/daily_dates.json');
-const weekly_dates = require('../client/weekly_dates.json');
+const daily_dates = require('../track_data/daily/dates.json');
+const weekly_dates = require('../track_data/weekly/dates.json');
 
 const _ = require('lodash');
 
@@ -48,21 +48,21 @@ class Home extends React.Component {
   collectData = (type) => {
     let data = {};
     let arr = [];
-    if (type === 'daily_data') {
+    if (type === 'daily') {
       arr = daily_dates;
-    } else if (type === 'weekly_data') {
+    } else if (type === 'weekly') {
       arr = weekly_dates;
     }
     arr.forEach((file) => {
-      var dateFile = require(`../client/${type}/${file}.json`);
+      var dateFile = require(`../track_data/${type}/data/${file}.json`);
       data[file] = dateFile;
     })
     return data;
   }
 
   collectAllData = () => {
-    const dailyInfo = this.collectData('daily_data');
-    const weeklyInfo = this.collectData('weekly_data');
+    const dailyInfo = this.collectData('daily');
+    const weeklyInfo = this.collectData('weekly');
     this.addDataToStore(daily_dates, weekly_dates, dailyInfo, weeklyInfo);
   }
 
