@@ -48,7 +48,7 @@ export default class TrackRow extends React.Component {
 
   formatDate = (dateString) => {
     var date = dateString.split('_').join('/');
-    var momentDate = moment(date);
+    var momentDate = moment(date, "MM/DD/YYYY");
     var day = momentDate.format('DD');
     var month = momentDate.format('MMM');
     var dateArray = [day, month];
