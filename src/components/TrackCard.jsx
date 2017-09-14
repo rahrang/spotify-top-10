@@ -54,7 +54,7 @@ export default class TrackCard extends React.Component {
 
   render() {
 
-    let { trackInfo, rank, setActiveID, active, openModal } = this.props;
+    let { trackInfo, rank, setActiveID, active, def, openModal } = this.props;
     let { trackName, imageSrc, trackID } = this.state;
     
     if (!trackInfo) {
@@ -65,7 +65,7 @@ export default class TrackCard extends React.Component {
       <div
         className={css(
           styles.trackCard,
-          !active && styles.inactive,
+          (!active & !def) && styles.inactive,
           // rank === '02' && marginOffsets.two,
           // rank === '03' && marginOffsets.three,
           // rank === '04' && marginOffsets.four,
@@ -80,7 +80,9 @@ export default class TrackCard extends React.Component {
         onMouseLeave={(e) => setActiveID(e, -1)}
         onClick={(e) => openModal(e, this.state)}
       >
-        <div className={css(styles.rank)}> { rank } </div>
+        <div className={css(styles.rank, active && styles.active)}>
+          {rank}
+        </div>
         <img
           className={css(styles.trackImage)}
           src={imageSrc}
@@ -106,6 +108,10 @@ const styles = StyleSheet.create({
 
   inactive: {
     opacity: '0.15',
+  },
+
+  active: {
+    color: '#1DB954',
   },
 
   rank: {

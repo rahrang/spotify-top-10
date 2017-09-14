@@ -69,7 +69,8 @@ export default class TrackRow extends React.Component {
       return (
         <TrackCard
           key={`${date}_${index}`}
-          active={activeID === -1 || activeID === track.track.id}
+          active={activeID === track.track.id}
+          def={activeID === -1}
           index={index}
           rank={this.formatRank(index)}
           setActiveID={setActiveID}

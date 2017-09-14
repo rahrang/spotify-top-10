@@ -146,7 +146,6 @@ class Home extends React.Component {
     }
 
     let trackRows = dates.map((date, index) => {
-      debugger
       return (
         <TrackRow
           key={date}
@@ -201,6 +200,32 @@ class Home extends React.Component {
         <div className={css(styles.trackRowContainer)}>
           { trackRows }
         </div>
+        <div className={css(styles.footer)}>
+          <p className={css(styles.disclaimer)}>
+            This application is NOT endorsed by Spotify.
+          </p>
+          <p className={css(styles.links)}>
+            <a className={css(styles.link)} href='/about'>
+              About
+            </a>
+            |
+            <a
+              className={css(styles.link)}
+              href='https://github.com/rahrang/SpotifyTop10'
+              target='blank'
+            >
+              Source Code
+            </a>
+            |
+            <a
+              className={css(styles.link)}
+              href='http://rahrang.xyz'
+              target='blank'
+            >
+              Rahul Rangnekar
+            </a>
+          </p>
+        </div>
         <TrackModal
           isOpen={isModalOpen}
           onRequestClose={this.closeModal}
@@ -230,24 +255,25 @@ const styles = StyleSheet.create({
   homeContainer: {
     backgroundColor: '#222222',
     minHeight: '100vh',
-    padding: '20px 0',
+    padding: '20px 0 0',
   },
 
   headerContainer: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'bottom',
+    alignItems: 'center',
     justifyContent: 'space-between',
     padding: '10px 20px',
   },
 
   header: {
+    borderBottom: '2px solid #1DB954',
     color: '#FFF',
     fontFamily: 'Raleway, sans-serif',
     fontSize: '1.5em',
     fontWeight: '500',
     margin: '0',
-    padding: '0',
+    padding: '3px 0',
   },
 
   selectionContainer: {
@@ -280,11 +306,37 @@ const styles = StyleSheet.create({
   },
 
   activeSelection: {
-    borderBottom: '2px solid #FFF',
+    borderBottom: '2px solid #1DB954',
   },
 
   trackRowContainer: {
     padding: '40px 0',
+  },
+
+  footer: {
+    backgroundColor: '#000',
+    color: '#FFF',
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'space-between',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '0.875em',
+    padding: '0 10px',
+  },
+
+  links: {
+
+  },
+
+  link: {
+    padding: '0 3px',
+    margin: '0 3px',
+    color: '#FFF',
+    textDecoration: 'none',
+    ':hover': {
+      color: '#1DB954',
+    }
   }
 
 })
