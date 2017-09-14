@@ -58,8 +58,8 @@ export default class TrackRow extends React.Component {
 
   render() {
 
-    let { dateInfo, activeID, setActiveID, openModal } = this.props;
-    let { date } = this.state;
+    let { activeID, setActiveID, openModal } = this.props;
+    let { date, dateInfo } = this.state;
     
     if (!dateInfo) {
       return null;
