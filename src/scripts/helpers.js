@@ -7,6 +7,10 @@ var addDate = (file, date) => {
     try {
         var dateString = fs.readFileSync(file)
         dates = JSON.parse(dateString);
+        if (dates.includes(date)) {
+            console.log(`ERROR: ${file} already contains ${date}`);
+            return false;
+        }
     } catch (e) {
         console.log('could not read dates');
         return [];
@@ -14,6 +18,7 @@ var addDate = (file, date) => {
 
     dates.unshift(date);
     fs.writeFileSync(file, JSON.stringify(dates));
+    return true;
 }
 
 var getDates = (file) => {

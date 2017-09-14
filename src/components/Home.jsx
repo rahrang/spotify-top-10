@@ -152,7 +152,7 @@ class Home extends React.Component {
         <TrackRow
           key={date}
           date={date}
-          dateInfo={dataArray && dataArray[date].items}
+          dateInfo={dataArray[date].items}
           activeID={activeID}
           setActiveID={this.setActiveID}
           openModal={this.openModal}
@@ -185,6 +185,7 @@ class Home extends React.Component {
               <button
                 className={css(styles.selection, view === 'weekly' && styles.activeSelection)}
                 onClick={() => this.setState({view: 'weekly'})}
+                disabled={chart === 'global'} // remove this after pulling initial info for global
               >
                 Weekly
               </button>
