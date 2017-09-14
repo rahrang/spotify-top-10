@@ -5,3 +5,5 @@ node_modules
 .npm
 
 src/client/data_grabber.js
+
+build/
