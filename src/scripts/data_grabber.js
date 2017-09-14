@@ -69,11 +69,13 @@ var makeRequest = (chartPath, chartID) => {
         let dateAdded = helpers.addDate(`${chartPath}/daily/dates.json`, fileName);
         if (dateAdded) {  
           fs.appendFileSync(`${chartPath}/daily/data/${fileName}.json`, bodyString);
+          console.log(`successfully added data for daily ${chartID}`);
         }
         if (day === 'Monday') {
           let dateAdded = helpers.addDate(`${chartPath}/weekly/dates.json`, fileName);
           if (dateAdded) {
             fs.appendFileSync(`${chartPath}/weekly/data/${fileName}.json`, bodyString);
+            console.log(`successfully added data for weekly ${chartID}`);
           }
         }
       });

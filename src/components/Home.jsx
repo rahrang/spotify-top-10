@@ -204,11 +204,13 @@ class Home extends React.Component {
           <p className={css(styles.disclaimer)}>
             This application is NOT endorsed by Spotify.
           </p>
-          <p className={css(styles.links)}>
-            <a className={css(styles.link)} href='/about'>
-              About
-            </a>
-            |
+          <p className='links'>
+            {/*
+              <a className={css(styles.link)} href='/about'>
+                About
+              </a>
+              |
+            */}
             <a
               className={css(styles.link)}
               href='https://github.com/rahrang/SpotifyTop10'
@@ -301,7 +303,7 @@ const styles = StyleSheet.create({
     letterSpacing: '0.025em',
     outline: 'none',
     margin: '0 5px',
-    padding: '0 5px',
+    padding: '0 0 1px 0',
     textTransform: 'uppercase',
   },
 
@@ -322,11 +324,7 @@ const styles = StyleSheet.create({
     justifyContent: 'space-between',
     fontFamily: 'Raleway, sans-serif',
     fontSize: '0.875em',
-    padding: '0 10px',
-  },
-
-  links: {
-
+    padding: '0 20px',
   },
 
   link: {
