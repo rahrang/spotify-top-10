@@ -4,14 +4,14 @@
  * author: @rahrang
 */
 
-// Import built-in NPM modules
+// Built-in NPM modules
 const fs = require('fs');
 
-// Import NPM packages
+// NPM packages
 const request = require('request');
 const moment = require('moment');
 
-// Import local helper file
+// Local helper file
 const helpers = require('./helpers.js');
 
 /*** CONSTANTS ***/

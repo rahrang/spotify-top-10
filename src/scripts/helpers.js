@@ -1,4 +1,11 @@
+/***
+ * Six Degrees of Spotify
+ * These are helper functions to 
+ * author: @rahrang
+*/
+
 const fs = require('fs');
+const _ = require('lodash');
 
 var addDate = (file, date) => {
 
@@ -7,7 +14,7 @@ var addDate = (file, date) => {
     try {
         var dateString = fs.readFileSync(file)
         dates = JSON.parse(dateString);
-        if (dates.includes(date)) {
+        if (_.includes(dates, date)) {
             console.log(`ERROR: ${file} already contains ${date}`);
             return false;
         }
@@ -22,12 +29,8 @@ var addDate = (file, date) => {
 }
 
 var getDates = (file) => {
-    
-    var dates = [];
-
     try {
         var dateString = fs.readFileSync(file);
-        console.log('from here');
         return JSON.parse(dateString);
     } catch (e) {
         console.log('error', e);
