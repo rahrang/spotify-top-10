@@ -1,2 +1,2 @@
 # SpotifyTop10
-This application will track the top 10 Spotify tracks in the United States over an extended period of time through a daily manual backend request. It will graph ranking info and make requests for more data when users specify.
+This application tracks the top 10 Spotify songs globally and within the United States. A daily manual request to the Spotify API collects the day's data. The app tracks a song's rank in the Top 10. Thanks for checking this out!

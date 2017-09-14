@@ -48,7 +48,7 @@ export default class TrackRow extends React.Component {
 
   formatDate = (dateString) => {
     var date = dateString.split('_').join('/');
-    var momentDate = moment(date);
+    var momentDate = moment(date, "MM/DD/YYYY");
     var day = momentDate.format('DD');
     var month = momentDate.format('MMM');
     var dateArray = [day, month];
@@ -58,7 +58,7 @@ export default class TrackRow extends React.Component {
 
   render() {
 
-    let { dateInfo, activeID, setActiveID } = this.props;
+    let { dateInfo, activeID, setActiveID, openModal } = this.props;
     let { date } = this.state;
     
     if (!dateInfo) {
@@ -74,6 +74,7 @@ export default class TrackRow extends React.Component {
           rank={this.formatRank(index)}
           setActiveID={setActiveID}
           trackInfo={track}
+          openModal={openModal}
         />
       )
     })
@@ -97,9 +98,9 @@ const styles = StyleSheet.create({
   trackRow: {
     display: 'flex',
     flexDirection: 'row',
-    alignItems: 'center',
+    alignItems: 'top',
     justifyContent: 'center',
-    margin: '15px 0',
+    margin: '15px 0', // keep this when margin offsets on TrackCards are commented out
     width: '100%',
   },
 
@@ -108,7 +109,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '75px 0 0',
+    margin: '100px 0 0',
     padding: '0 10px',
   },
 

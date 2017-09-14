@@ -54,7 +54,7 @@ export default class TrackCard extends React.Component {
 
   render() {
 
-    let { trackInfo, rank, setActiveID, active } = this.props;
+    let { trackInfo, rank, setActiveID, active, openModal } = this.props;
     let { trackName, imageSrc, trackID } = this.state;
     
     if (!trackInfo) {
@@ -63,8 +63,22 @@ export default class TrackCard extends React.Component {
 
     return (
       <div
-        className={css(styles.trackCard, !active && styles.inactive)}
-        onClick={(e) => setActiveID(e, trackID)}
+        className={css(
+          styles.trackCard,
+          !active && styles.inactive,
+          // rank === '02' && marginOffsets.two,
+          // rank === '03' && marginOffsets.three,
+          // rank === '04' && marginOffsets.four,
+          // rank === '05' && marginOffsets.five,
+          // rank === '06' && marginOffsets.six,
+          // rank === '07' && marginOffsets.seven,
+          // rank === '08' && marginOffsets.eight,
+          // rank === '09' && marginOffsets.nine,
+          // rank === '10' && marginOffsets.ten
+        )}
+        onMouseOver={(e) => setActiveID(e, trackID)}
+        onMouseLeave={(e) => setActiveID(e, -1)}
+        onClick={(e) => openModal(e, this.state)}
       >
         <div className={css(styles.rank)}> { rank } </div>
         <img
@@ -83,9 +97,10 @@ export default class TrackCard extends React.Component {
 const styles = StyleSheet.create({
 
   trackCard: {
+    cursor: 'pointer',
     display: 'flex',
     flexDirection: 'column',
-    margin: '0 2px',
+    padding: '0 2px',
     width: '125px', // use media queries to change these based on screen width
   },
 
@@ -96,7 +111,7 @@ const styles = StyleSheet.create({
   rank: {
     color: '#FFF',
     fontFamily: 'Oswald, sans-serif',
-    fontSize: '2.5em',
+    fontSize: '2.25em',
     fontWeight: 'bold',
     padding: '0 0 5px 0',
     textAlign: 'center',
@@ -116,5 +131,45 @@ const styles = StyleSheet.create({
     padding: '4px 0 4px 4px',
     textTransform: 'uppercase',
   }
+
+});
+
+const marginOffsets = StyleSheet.create({
+
+  two: {
+    marginTop: '10px',
+  },
+
+  three: {
+    marginTop: '20px',
+  },
+
+  four: {
+    marginTop: '30px',
+  },
+
+  five: {
+    marginTop: '40px',
+  },
+
+  six: {
+    marginTop: '50px',
+  },
+
+  seven: {
+    marginTop: '60px',
+  },
+
+  eight: {
+    marginTop: '70px',
+  },
+
+  nine: {
+    marginTop: '80px',
+  },
+
+  ten: {
+    marginTop: '90px',
+  },
 
 })

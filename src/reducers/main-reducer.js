@@ -1,10 +1,18 @@
 import { MainConstants } from '../actions/main-actions';
 
 const defaultState = {
-    dailyDates: [],
-    weeklyDates: [],
-    dailyInfo: {},
-    weeklyInfo: {}
+
+    globalWeeklyDates: [],
+    globalWeeklyInfo: {},
+  
+    globalDailyDates: [],
+    globalDailyInfo: {},
+
+    usaWeeklyDates: [],
+    usaWeeklyInfo: {},
+
+    usaDailyDates: [],
+    usaDailyInfo: {},
 };
 
 const MainReducer = (state = defaultState, action) => {

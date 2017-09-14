@@ -17,10 +17,13 @@ import { MainActions } from '../actions/main-actions.js';
 
 // Local Components
 import TrackRow from './TrackRow.jsx';
+import TrackModal from './TrackModal.jsx';
 
 // Date Files
-const daily_dates = require('../client/daily_dates.json');
-const weekly_dates = require('../client/weekly_dates.json');
+const global_weekly_dates = require('../track_data/global/weekly/dates.json');
+const global_daily_dates = require('../track_data/global/daily/dates.json');
+const usa_weekly_dates = require('../track_data/usa/weekly/dates.json');
+const usa_daily_dates = require('../track_data/usa/daily/dates.json');
 
 const _ = require('lodash');
 
@@ -29,38 +32,56 @@ class Home extends React.Component {
   constructor(props) {
     super(props);
     this.state = {
-      view: 'daily',
       activeID: -1,
+      activeTrackInfo: {},
+      isModalOpen: false,
+      view: 'daily',
+      chart: 'usa',
     }
+
+    this.openModal = this.openModal.bind(this);
+    this.closeModal = this.closeModal.bind(this);
+
   }
 
   componentDidMount() {
     this.collectAllData();
   }
 
-  collectData = (type) => {
+  // add chart as parameter
+  collectData = (chart, view, arr) => {
     let data = {};
-    let arr = [];
-    if (type === 'daily_data') {
-      arr = daily_dates;
-    } else if (type === 'weekly_data') {
-      arr = weekly_dates;
-    }
     arr.forEach((file) => {
-      var dateFile = require(`../client/${type}/${file}.json`);
+      let dateFile = require(`../track_data/${chart}/${view}/data/${file}.json`);
       data[file] = dateFile;
     })
     return data;
   }
 
   collectAllData = () => {
-    const dailyInfo = this.collectData('daily_data');
-    const weeklyInfo = this.collectData('weekly_data');
-    this.addDataToStore(daily_dates, weekly_dates, dailyInfo, weeklyInfo);
+    const globalWeeklyInfo = this.collectData('global', 'weekly', global_weekly_dates);
+    const globalDailyInfo = this.collectData('global', 'daily', global_daily_dates);
+    const usaWeeklyInfo = this.collectData('usa', 'weekly', usa_weekly_dates);
+    const usaDailyInfo = this.collectData('usa', 'daily', usa_daily_dates);
+    let data = [
+      [
+        global_weekly_dates,
+        globalWeeklyInfo,
+        global_daily_dates,
+        globalDailyInfo
+      ],
+      [
+        usa_weekly_dates,
+        usaWeeklyInfo,
+        usa_daily_dates,
+        usaDailyInfo
+      ]
+    ]
+    this.addDataToStore(data);
   }
 
-  addDataToStore = (dailyDates, weeklyDates, dailyInfo, weeklyInfo) => {
-    this.props.mainActions.storeData(dailyDates, weeklyDates, dailyInfo, weeklyInfo);
+  addDataToStore = (data) => {
+    this.props.mainActions.storeData(data);
   }
 
   setActiveID = (e, id) => {
@@ -72,23 +93,69 @@ class Home extends React.Component {
     this.setState({activeID: -1});
   }
 
+  openModal = (e, trackInfo) => {
+    e.stopPropagation();
+    this.setState({
+      isModalOpen: true,
+      activeTrackInfo: trackInfo,
+    });
+  }
+
+  closeModal = (e) => {
+    e.stopPropagation();
+    this.setState({
+      isModalOpen: false,
+      activeTrackInfo: {},
+    })
+  }
+
+  getData = (chart, view) => {
+    let { main } = this.props;
+    let dates = [];
+    let dataArray = [];
+    if (chart === 'global') {
+      if (view === 'weekly') {
+        dates = main.globalWeeklyDates;
+        dataArray = main.globalWeeklyInfo;
+      } else if (view === 'daily') {
+        dates = main.globalDailyDates;
+        dataArray = main.globalDailyInfo;
+      }
+    } else if (chart === 'usa') {
+      if (view === 'weekly') {
+        dates = main.usaWeeklyDates;
+        dataArray = main.usaWeeklyInfo;
+      } else if (view === 'daily') {
+        dates = main.usaDailyDates;
+        dataArray = main.usaDailyInfo;
+      }
+    }
+    return [dates, dataArray]
+  }
+
   render() {
 
     let { main } = this.props;
-    let { activeID } = this.state;
+    let { activeID, isModalOpen, view, chart } = this.state;
 
-    if (_.isEmpty(main.dailyInfo)) {
+    let data = this.getData(chart, view);
+    let dates = data[0];
+    let dataArray = data[1];
+
+    if (_.isEmpty(dates) || _.isEmpty(dataArray)) {
       return null;
     }
 
-    var trackRows = daily_dates.map((date, index) => {
+    let trackRows = dates.map((date, index) => {
+      debugger
       return (
         <TrackRow
           key={date}
           date={date}
-          dateInfo={main.dailyInfo[date].items}
+          dateInfo={dataArray[date].items}
           activeID={activeID}
           setActiveID={this.setActiveID}
+          openModal={this.openModal}
         />
       )
     });
@@ -97,8 +164,48 @@ class Home extends React.Component {
       <div className={css(styles.homeContainer)}
         onClick={(e) => this.resetActiveID(e)}
       >
-        <h1 className={css(styles.header)}>Spotify Top 10</h1>
-        { trackRows }
+        <div className={css(styles.headerContainer)}>
+          <h1 className={css(styles.header)}>Spotify Top 10</h1>
+          <div className={css(styles.selectionContainer)}>
+            <div className={css(styles.container)}>
+              <button
+                className={css(styles.selection, chart === 'global' && styles.activeSelection)}
+                onClick={() => this.setState({chart: 'global'})}
+              >
+                Global
+              </button>
+              <button
+                className={css(styles.selection, chart === 'usa' && styles.activeSelection)}
+                onClick={() => this.setState({chart: 'usa'})}
+              >
+                USA
+              </button>         
+            </div>
+            <div className={css(styles.container)}>
+              <button
+                className={css(styles.selection, view === 'weekly' && styles.activeSelection)}
+                onClick={() => this.setState({view: 'weekly'})}
+                disabled={chart === 'global'} // remove this after pulling initial info for global
+              >
+                Weekly
+              </button>
+              <button
+                className={css(styles.selection, view === 'daily' && styles.activeSelection)}
+                onClick={() => this.setState({view: 'daily'})}
+              >
+                Daily
+              </button>
+            </div>
+          </div>
+        </div>
+        <div className={css(styles.trackRowContainer)}>
+          { trackRows }
+        </div>
+        <TrackModal
+          isOpen={isModalOpen}
+          onRequestClose={this.closeModal}
+          trackInfo={this.state.activeTrackInfo}
+        />
       </div>
     );
   }
@@ -122,6 +229,16 @@ const styles = StyleSheet.create({
 
   homeContainer: {
     backgroundColor: '#222222',
+    minHeight: '100vh',
+    padding: '20px 0',
+  },
+
+  headerContainer: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'bottom',
+    justifyContent: 'space-between',
+    padding: '10px 20px',
   },
 
   header: {
@@ -130,7 +247,44 @@ const styles = StyleSheet.create({
     fontSize: '1.5em',
     fontWeight: '500',
     margin: '0',
-    padding: '10px',
+    padding: '0',
+  },
+
+  selectionContainer: {
+    display: 'flex',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+  },
+
+  container: {
+    display: 'flex',
+    flexDirection: 'row',
+    alignItems: 'center',
+    justifyContent: 'center',
+    margin: '5px 0',
+  },
+
+  selection: {
+    backgroundColor: 'rgba(0, 0, 0, 0)',
+    border: 'none',
+    color: '#FFF',
+    cursor: 'pointer',
+    fontFamily: 'Raleway, sans-serif',
+    fontSize: '1em',
+    letterSpacing: '0.025em',
+    outline: 'none',
+    margin: '0 5px',
+    padding: '0 5px',
+    textTransform: 'uppercase',
+  },
+
+  activeSelection: {
+    borderBottom: '2px solid #FFF',
+  },
+
+  trackRowContainer: {
+    padding: '40px 0',
   }
 
 })
