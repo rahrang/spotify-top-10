@@ -71,7 +71,7 @@ var saveFile = (file, fileJSON) => {
     fs.writeFileSync(file, JSON.stringify(fileJSON));
 }
 
-collectRanks('global', 'weekly', global_weekly_dates, global_weekly_ranks_path);
+// collectRanks('global', 'weekly', global_weekly_dates, global_weekly_ranks_path);
 collectRanks('global', 'daily', global_daily_dates, global_daily_ranks_path);
 collectRanks('usa', 'weekly', usa_weekly_dates, usa_weekly_ranks_path);
 collectRanks('usa', 'daily', usa_daily_dates, usa_daily_ranks_path);
