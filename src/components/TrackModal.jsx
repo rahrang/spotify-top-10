@@ -10,19 +10,37 @@ import React from 'react';
 // NPM Modules
 import { css, StyleSheet } from 'aphrodite';
 import Modal from 'react-modal';
-// import {LineChart, XAxis, YAxis, CartesianGrid} from 'recharts';
+import { LineChart, XAxis, YAxis, CartesianGrid, Line } from 'recharts';
 
 const _ = require('lodash');
+const moment = require('moment');
+
 
 export default class TrackModal extends React.Component {
 
+  formatDate = (dateString) => {
+    var date = dateString.split('_').join('/');
+    var momentDate = moment(date, "MM/DD/YYYY");
+    var day = momentDate.format('DD');
+    var month = momentDate.format('MMM');
+    return `${day} ${month}`;
+  }
+
+  formatRank = (rank) => {
+    return (rank * -1);
+  }
+
   render() {
 
-    let { isOpen, onRequestClose, trackInfo } = this.props;
+    let { isOpen, onRequestClose, trackInfo, chart, view } = this.props;
 
     if (_.isEmpty(trackInfo)) {
       return null;
     }
+
+    let dates = require(`../track_data/${chart}/${view}/dates.json`);
+    let ranks = _.range(0, -11, -1);
+    let chartData = require(`../track_data/${chart}/${view}/ranks/${trackInfo.trackID}.json`);
 
     let featArtists = [];
     for (let i = 1; i < trackInfo.artists.length; i++) {
@@ -73,15 +91,35 @@ export default class TrackModal extends React.Component {
                 {trackInfo.albumName}
               </h2>
             </div>
-            {/*
             <div className={css(styles.lineChart)}>
-              <LineChart width={400} height={300} data={[{date: '1', rank: '1'}]}>
-                <XAxis dataKey='date' />
-                <YAxis dataKey='rank' />
-                <CartesianGrid strokeDasharray="3 3" />
-              </LineChart>
+
+              <LineChart
+                width={600}
+                height={300}
+                data={chartData}
+                // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
+              >
+                <XAxis
+                  dataKey="date"
+                  ticks={dates}
+                  tickFormatter={this.formatDate}
+                />
+                <YAxis
+                  dataKey="rank"
+                  tick={{fill: '#1DB954'}}
+                  ticks={ranks}
+                  tickFormatter={(r) => (r*-1)}
+                  domain={_.range(1, 11)}
+                  type='number'
+                />
+                <CartesianGrid stroke="#222" strokeDasharray="2 2"/>
+                <Line
+                  type="monotone"
+                  dataKey="rank"
+                  stroke="#1DB954"
+                />
+              </LineChart>            
             </div>
-            */}  
           </div>
         </div>
       </Modal>
