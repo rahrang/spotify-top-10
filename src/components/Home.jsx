@@ -202,9 +202,9 @@ class Home extends React.Component {
         </div>
         <div className={css(styles.footer)}>
           <p className={css(styles.disclaimer)}>
-            This application is NOT endorsed by Spotify.
+            This application is not endorsed by Spotify.
           </p>
-          <p className='links'>
+          <p className={css(styles.links)}>
             {/*
               <a className={css(styles.link)} href='/about'>
                 About
@@ -272,7 +272,7 @@ const styles = StyleSheet.create({
     borderBottom: '2px solid #1DB954',
     color: '#FFF',
     fontFamily: 'Raleway, sans-serif',
-    fontSize: '1.5em',
+    fontSize: '2em',
     fontWeight: '500',
     margin: '0',
     padding: '3px 0',
@@ -325,6 +325,10 @@ const styles = StyleSheet.create({
     fontFamily: 'Raleway, sans-serif',
     fontSize: '0.875em',
     padding: '0 20px',
+  },
+
+  links: {
+    textAlign: 'right',
   },
 
   link: {

@@ -98,11 +98,13 @@ const styles = StyleSheet.create({
 
   trackRow: {
     display: 'flex',
-    flexDirection: 'row',
-    alignItems: 'top',
+    flexDirection: 'column',
+    alignItems: 'center',
     justifyContent: 'center',
     margin: '15px 0', // keep this when margin offsets on TrackCards are commented out
-    width: '100%',
+    '@media(min-width: 768px)': {
+      flexDirection: 'row',
+    }
   },
 
   date: {
@@ -110,8 +112,7 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center',
-    margin: '100px 0 0',
-    padding: '0 10px',
+    padding: '0 20px',
   },
 
   day: {
@@ -135,7 +136,13 @@ const styles = StyleSheet.create({
 
   trackCardContainer: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    alignItems: 'center',
+    justifyContent: 'center',
+    flexFlow: 'row wrap',
+    '@media(min-width: 768px)': {
+      flexDirection: 'row',
+    }
   },
 
 })

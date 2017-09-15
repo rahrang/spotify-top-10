@@ -65,17 +65,7 @@ export default class TrackCard extends React.Component {
       <div
         className={css(
           styles.trackCard,
-          (!active & !def) && styles.inactive,
-          // rank === '02' && marginOffsets.two,
-          // rank === '03' && marginOffsets.three,
-          // rank === '04' && marginOffsets.four,
-          // rank === '05' && marginOffsets.five,
-          // rank === '06' && marginOffsets.six,
-          // rank === '07' && marginOffsets.seven,
-          // rank === '08' && marginOffsets.eight,
-          // rank === '09' && marginOffsets.nine,
-          // rank === '10' && marginOffsets.ten
-        )}
+          (!active && !def) && styles.inactive)}
         onMouseOver={(e) => setActiveID(e, trackID)}
         onMouseLeave={(e) => setActiveID(e, -1)}
         onClick={(e) => openModal(e, this.state)}
@@ -103,7 +93,13 @@ const styles = StyleSheet.create({
     display: 'flex',
     flexDirection: 'column',
     padding: '0 2px',
-    width: '125px', // use media queries to change these based on screen width
+    width: '125px',
+    '@media(min-width: 1024px)': {
+      width: '160px',
+    },
+    '@media(min-width: 1440px)': {
+      width: '125px',
+    },
   },
 
   inactive: {
@@ -124,8 +120,16 @@ const styles = StyleSheet.create({
   },
 
   trackImage: {
-    height: '125px', // use media queries to change these based on screen width
+    height: '125px',
     width: '125px',
+    '@media(min-width: 1024px)': {
+      height: '160px',
+      width: '160px',
+    },
+    '@media(min-width: 1440px)': {
+      height: '125px',
+      width: '125px',
+    },
   },
 
   trackTitle: {
@@ -139,43 +143,3 @@ const styles = StyleSheet.create({
   }
 
 });
-
-const marginOffsets = StyleSheet.create({
-
-  two: {
-    marginTop: '10px',
-  },
-
-  three: {
-    marginTop: '20px',
-  },
-
-  four: {
-    marginTop: '30px',
-  },
-
-  five: {
-    marginTop: '40px',
-  },
-
-  six: {
-    marginTop: '50px',
-  },
-
-  seven: {
-    marginTop: '60px',
-  },
-
-  eight: {
-    marginTop: '70px',
-  },
-
-  nine: {
-    marginTop: '80px',
-  },
-
-  ten: {
-    marginTop: '90px',
-  },
-
-})

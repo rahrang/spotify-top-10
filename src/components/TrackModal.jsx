@@ -40,8 +40,16 @@ export default class TrackModal extends React.Component {
 
         <div className={css(styles.bodyContainer)}>
           <div className={css(styles.leftContainer)}>
-            <img className={css(styles.image)} src={trackInfo.imageSrc} alt={trackInfo.trackName} />
-          </div>
+              <iframe
+                title={trackInfo.trackName}
+                src={`https://open.spotify.com/embed?uri=${trackInfo.uri}`}
+                frameBorder="0"
+                allowTransparency="true"
+                width={'100%'}
+                height={'100%'}
+              >
+              </iframe>
+            </div>
           <div className={css(styles.rightContainer)}>
             <div className={css(styles.headerContainer)}>
               <h1 className={css(styles.trackName)}> {trackInfo.trackName} </h1>
@@ -73,18 +81,7 @@ export default class TrackModal extends React.Component {
                 <CartesianGrid strokeDasharray="3 3" />
               </LineChart>
             </div>
-            */}
-            <div className={css(styles.playerContainer)}>
-              <iframe
-                title={trackInfo.trackName}
-                src={`https://open.spotify.com/embed?uri=${trackInfo.uri}`}
-                frameBorder="0"
-                allowTransparency="true"
-                width={350}
-                height={80}
-              >
-              </iframe>
-            </div>   
+            */}  
           </div>
         </div>
       </Modal>
@@ -95,17 +92,11 @@ export default class TrackModal extends React.Component {
 const styles = StyleSheet.create({
 
   modal: {
-    backgroundColor: '#222',
-    border: '3px solid #FFF',
-    borderRadius: '5px',
+    backgroundColor: '#FFF',
     outline: 'none',
-    position: 'absolute',
-    top: '50%',
-    left: '50%',
-    transform: 'translate(-50%, -50%)',
-    height: '500px',
-    width: '1000px',
-
+    height: '100%',
+    width: '100%',
+    overflow: 'disabled',
   },
 
   overlay : {
@@ -124,15 +115,15 @@ const styles = StyleSheet.create({
   },
 
   icon: {
-    color: '#FFF',
+    color: '#1DB954',
     fontSize: '1.5em',
   },
 
   trackName: {
-    borderBottom: '3px solid #FFF',
-    color: '#FFF',
+    borderBottom: '3px solid #1DB954',
+    color: '#222',
     fontFamily: 'Oswald, sans-serif',
-    fontSize: '2em',
+    fontSize: '2.5em',
     margin: '0',
     padding: '10px 30px',
     textAlign: 'center',
@@ -141,7 +132,12 @@ const styles = StyleSheet.create({
 
   bodyContainer: {
     display: 'flex',
-    flexDirection: 'row',
+    flexDirection: 'column',
+    justifyContent: 'center',
+    height: '100%',
+    '@media(min-width:768px)': {
+      flexDirection: 'row',
+    }
   },
 
   leftContainer: {
@@ -150,11 +146,7 @@ const styles = StyleSheet.create({
     flexDirection: 'column',
     alignItems: 'center',
     justifyContent: 'center',
-  },
-
-  image: {
-    height: '500px',
-    width: '500px',
+    height: '100%',
   },
 
   rightContainer: {
@@ -173,7 +165,7 @@ const styles = StyleSheet.create({
 
   infoContainer: {
     padding: '20px',
-    color: '#FFF',
+    color: '#222',
     fontFamily: 'Raleway, sans-serif',
     textAlign: 'center',
   },
