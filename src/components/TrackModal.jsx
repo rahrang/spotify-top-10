@@ -11,10 +11,10 @@ import React from 'react';
 import { css, StyleSheet } from 'aphrodite';
 import Modal from 'react-modal';
 import { LineChart, XAxis, YAxis, CartesianGrid, Line } from 'recharts';
+import { fadeIn } from 'react-animations';
 
 const _ = require('lodash');
 const moment = require('moment');
-
 
 export default class TrackModal extends React.Component {
 
@@ -51,7 +51,7 @@ export default class TrackModal extends React.Component {
       <Modal
         isOpen={isOpen}
         onRequestClose={onRequestClose}
-        className={css(styles.modal)}
+        className={css(styles.modal, styles.fadeIn)}
         overlayClassName={css(styles.overlay)}
         contentLabel="Modal"
       >
@@ -229,4 +229,8 @@ const styles = StyleSheet.create({
     letterSpacing: '0.0125em',
   },
 
+  fadeIn: {
+    animationName: fadeIn,
+    animationDuration: '0.5s',
+  }
 })

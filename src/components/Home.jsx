@@ -11,6 +11,7 @@ import React from 'react';
 import { connect } from 'react-redux';
 import { bindActionCreators } from 'redux';
 import { css, StyleSheet } from 'aphrodite';
+import { fadeIn } from 'react-animations';
 
 // Action File
 import { MainActions } from '../actions/main-actions.js';
@@ -159,7 +160,7 @@ class Home extends React.Component {
     });
 
     return (
-      <div className={css(styles.homeContainer)}
+      <div className={css(styles.homeContainer, styles.fadeIn)}
         onClick={(e) => this.resetActiveID(e)}
       >
         <div className={css(styles.headerContainer)}>
@@ -341,6 +342,10 @@ const styles = StyleSheet.create({
     ':hover': {
       color: '#1DB954',
     }
-  }
+  },
 
+  fadeIn: {
+    animationName: fadeIn,
+    animationDuration: '1s',
+  }
 })
