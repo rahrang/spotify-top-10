@@ -18,11 +18,13 @@ export default class TrackModal extends React.Component {
 
   render() {
 
-    let { isOpen, onRequestClose, trackInfo } = this.props;
+    let { isOpen, onRequestClose, trackInfo, chart, view } = this.props;
 
     if (_.isEmpty(trackInfo)) {
       return null;
     }
+
+    let trackFile = require(`../track_data/${chart}/${view}/ranks/${trackInfo.trackID}.json`);
 
     let featArtists = [];
     for (let i = 1; i < trackInfo.artists.length; i++) {

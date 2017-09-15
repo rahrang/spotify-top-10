@@ -232,6 +232,8 @@ class Home extends React.Component {
           isOpen={isModalOpen}
           onRequestClose={this.closeModal}
           trackInfo={this.state.activeTrackInfo}
+          view={view}
+          chart={chart}
         />
       </div>
     );
