@@ -97,7 +97,6 @@ export default class TrackModal extends React.Component {
                 width={600}
                 height={300}
                 data={chartData}
-                // margin={{ top: 5, right: 30, left: 20, bottom: 5 }}
               >
                 <XAxis
                   dataKey="date"
@@ -134,7 +133,7 @@ const styles = StyleSheet.create({
     outline: 'none',
     height: '100%',
     width: '100%',
-    overflow: 'disabled',
+    overflow: 'scroll',
   },
 
   overlay : {
@@ -192,6 +191,11 @@ const styles = StyleSheet.create({
     flex: '1',
     flexDirection: 'column',
     alignItems: 'center',
+    padding: '40px 0',
+    height: '100%',
+    '@media(min-width:768px)': {
+      padding: '0',
+    }
   },
 
   headerContainer: {
@@ -199,13 +203,18 @@ const styles = StyleSheet.create({
     flexDirection: 'row',
     alignItems: 'center',
     justifyContent: 'center',
+    // width: '100%',
   },
 
   infoContainer: {
-    padding: '20px',
+    padding: '50px 20px',
     color: '#222',
     fontFamily: 'Raleway, sans-serif',
     textAlign: 'center',
+    // width: '100%',
+    '@media(min-width:768px)': {
+      padding: '20px',
+    }
   },
 
   artistName: {
