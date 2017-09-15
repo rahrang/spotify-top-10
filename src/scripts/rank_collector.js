@@ -48,7 +48,8 @@ var collectRanks = (chart, view, dateArray, ranksPath) => {
             let track = dateData[j].track;
             let trackID = track.id;
             let data = {};
-            data[date] = (j + 1);
+            data['date'] = date;
+            data['rank'] = (-(j + 1));
 
             let file = `${ranksPath}/${trackID}.json`;
             let trackFile = fetchFile(file);
