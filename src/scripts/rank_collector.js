@@ -58,7 +58,7 @@ var collectRanks = (chart, view) => {
                 let data = {};
                 data['date'] = date;
                 data['rank'] = (-(j + 1));
-                trackFile.unshift(data);
+                trackFile.push(data);
                 saveFile(file, trackFile);
                 console.log(`${trackID} has been saved for ${date}`);
             
