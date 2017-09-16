@@ -67,18 +67,34 @@ var makeRequest = (chartPath, chartID) => {
       request.get(options, function(error, response, body) {
         bodyString = JSON.stringify(body);
         let dateAdded = helpers.addDate(`${chartPath}/daily/dates.json`, fileName);
+        
         if (dateAdded) {  
           fs.appendFileSync(`${chartPath}/daily/data/${fileName}.json`, bodyString);
           console.log(`successfully added data for daily ${chartID}`);
+        } else {
+          console.log(`${chartID} already contains ${date}`);
         }
+        
         if (day === 'Monday') {
           let dateAdded = helpers.addDate(`${chartPath}/weekly/dates.json`, fileName);
           if (dateAdded) {
             fs.appendFileSync(`${chartPath}/weekly/data/${fileName}.json`, bodyString);
             console.log(`successfully added data for weekly ${chartID}`);
+          } else {
+            console.log(`${chartID} already contains ${date}`);
           }
         }
       });
+    } else {
+      
+      if (error) {
+        console.log(`Error in grabbing data for ${chartID}`);
+      } else if (response.statusCode !== 200) {
+        console.log(`Error ${response.statusCode} in grabbing data for ${chartID}`);
+      } else {
+        console.log('This case should never occur. Something is wrong.');
+      }
+      
     }
   });
 }
