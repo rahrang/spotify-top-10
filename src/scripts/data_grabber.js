@@ -73,6 +73,7 @@ var makeRequest = (chartPath, chartID) => {
           console.log(`successfully added data for daily ${chartID}`);
         } else {
           console.log(`${chartID} already contains ${date}`);
+          return false;
         }
         
         if (day === 'Monday') {
@@ -82,8 +83,11 @@ var makeRequest = (chartPath, chartID) => {
             console.log(`successfully added data for weekly ${chartID}`);
           } else {
             console.log(`${chartID} already contains ${date}`);
+            return false;
           }
         }
+
+        return true;
       });
     } else {
       
@@ -94,11 +98,16 @@ var makeRequest = (chartPath, chartID) => {
       } else {
         console.log('This case should never occur. Something is wrong.');
       }
-      
+
+      return false;
     }
   });
 }
 
+module.exports = {
+  makeRequest
+}
+
 /*** Make requests to Spotify API ***/
-makeRequest(USA_PATH, USA_CHART);
-makeRequest(GLOBAL_PATH, GLOBAL_CHART);
+// makeRequest(USA_PATH, USA_CHART);
+// makeRequest(GLOBAL_PATH, GLOBAL_CHART);

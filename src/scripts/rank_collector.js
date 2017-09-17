@@ -69,8 +69,6 @@ var collectRanks = (chart, view) => {
     }
 }
 
-
-// use a filter function? 
 var fileContainsDate = (file, date) =>  {
     for (let k = 0; k < file.length; k++) {
         if (_.isEqual(file[k].date, date)) {
@@ -93,8 +91,12 @@ var saveFile = (file, fileJSON) => {
     fs.writeFileSync(file, JSON.stringify(fileJSON));
 }
 
+module.exports = {
+    collectRanks
+}
+
 /*** COLLECT THE RANKS ***/
 // collectRanks('global', 'weekly');
-collectRanks('global', 'daily');
-collectRanks('usa', 'weekly');
-collectRanks('usa', 'daily');
+// collectRanks('global', 'daily');
+// collectRanks('usa', 'weekly');
+// collectRanks('usa', 'daily');
