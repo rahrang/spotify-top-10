@@ -20,7 +20,7 @@ var addDate = (file, date) => {
         }
     } catch (e) {
         console.log('could not read dates');
-        return [];
+        dates = [];
     }
 
     dates.unshift(date);
