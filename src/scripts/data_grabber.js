@@ -4,7 +4,7 @@
  * author: @rahrang
 */
 
-// Built-in NPM modules
+// Node modules
 const fs = require('fs');
 
 // NPM packages
@@ -19,12 +19,7 @@ const CLIENT_ID = '547c50263a834e1aa8facc89365eb672';
 const CLIENT_SECRET = 'd6957ea6a316466e97f4ca8a7170be5f';
 
 const SPOTIFY_API_BASE_URL = 'https://api.spotify.com';
-const SPOTIFY_USER = 'spotifycharts'
-const USA_CHART = '37i9dQZEVXbLRQDuF5jeBp'; // US TOP 50
-const GLOBAL_CHART = '37i9dQZEVXbMDoHDwVN2tF'; // Global TOP 50
-
-const USA_PATH = '../track_data/usa';
-const GLOBAL_PATH = '../track_data/global';
+const SPOTIFY_USER = 'spotifycharts';
 
 /*** Create the file name ***/
 createDate = () => {
@@ -72,7 +67,7 @@ var makeRequest = (chartPath, chartID) => {
           fs.appendFileSync(`${chartPath}/daily/data/${fileName}.json`, bodyString);
           console.log(`successfully added data for daily ${chartID}`);
         } else {
-          console.log(`${chartID} already contains ${date}`);
+          console.log(`${chartID} already contains ${fileName}`);
           return false;
         }
         
@@ -107,7 +102,3 @@ var makeRequest = (chartPath, chartID) => {
 module.exports = {
   makeRequest
 }
-
-/*** Make requests to Spotify API ***/
-// makeRequest(USA_PATH, USA_CHART);
-// makeRequest(GLOBAL_PATH, GLOBAL_CHART);

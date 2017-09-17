@@ -4,12 +4,16 @@
  * author: @rahrang
 */
 
-// Import file server
+// Node Modules
 const fs = require('fs');
+
+// NPM Modules
 const _ = require('lodash');
 
+// // Local helper file
 const helpers = require('./helpers.js');
 
+/*** CONSTANTS ***/
 const GLOBAL_PATH = '../track_data/global';
 const USA_PATH = '../track_data/usa';
 
@@ -24,6 +28,7 @@ const usa_weekly_ranks_path = `${USA_PATH}/weekly/ranks`;
 
 const usa_daily_dates = require(`${USA_PATH}/daily/dates.json`);
 const usa_daily_ranks_path = `${USA_PATH}/daily/ranks`;
+
 
 var collectRanks = (chart, view) => {
 
@@ -94,9 +99,3 @@ var saveFile = (file, fileJSON) => {
 module.exports = {
     collectRanks
 }
-
-/*** COLLECT THE RANKS ***/
-// collectRanks('global', 'weekly');
-// collectRanks('global', 'daily');
-// collectRanks('usa', 'weekly');
-// collectRanks('usa', 'daily');
