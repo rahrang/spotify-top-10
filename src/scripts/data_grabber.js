@@ -21,6 +21,12 @@ const CLIENT_SECRET = 'd6957ea6a316466e97f4ca8a7170be5f';
 const SPOTIFY_API_BASE_URL = 'https://api.spotify.com';
 const SPOTIFY_USER = 'spotifycharts';
 
+const GLOBAL_PATH = '../track_data/global';
+const GLOBAL_CHART = '37i9dQZEVXbMDoHDwVN2tF'; // Global TOP 50
+const USA_PATH = '../track_data/usa';
+const USA_CHART = '37i9dQZEVXbLRQDuF5jeBp'; // US TOP 50
+
+
 /*** Create the file name ***/
 createDate = () => {
     const momentDate = moment().format('L').toString();
@@ -98,6 +104,10 @@ var makeRequest = (chartPath, chartID) => {
     }
   });
 }
+
+
+// makeRequest(USA_PATH, USA_CHART);
+// makeRequest(GLOBAL_PATH, GLOBAL_CHART);
 
 module.exports = {
   makeRequest
