@@ -96,10 +96,10 @@ var saveFile = (file, fileJSON) => {
     fs.writeFileSync(file, JSON.stringify(fileJSON));
 }
 
-// collectRanks('usa', 'weekly');
-// collectRanks('usa', 'daily');
-// collectRanks('global', 'weekly');
-// collectRanks('global', 'daily');
+collectRanks('usa', 'weekly');
+collectRanks('usa', 'daily');
+collectRanks('global', 'weekly');
+collectRanks('global', 'daily');
 
 module.exports = {
     collectRanks

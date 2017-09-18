@@ -106,8 +106,8 @@ var makeRequest = (chartPath, chartID) => {
 }
 
 
-// makeRequest(USA_PATH, USA_CHART);
-// makeRequest(GLOBAL_PATH, GLOBAL_CHART);
+makeRequest(USA_PATH, USA_CHART);
+makeRequest(GLOBAL_PATH, GLOBAL_CHART);
 
 module.exports = {
   makeRequest
