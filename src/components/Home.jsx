@@ -170,7 +170,6 @@ class Home extends React.Component {
               <button
                 className={css(styles.selection, chart === 'global' && styles.activeSelection)}
                 onClick={() => this.setState({chart: 'global'})}
-                disabled={view === 'weekly'} // remove this after pulling initial info for global
               >
                 Global
               </button>
@@ -185,7 +184,6 @@ class Home extends React.Component {
               <button
                 className={css(styles.selection, view === 'weekly' && styles.activeSelection)}
                 onClick={() => this.setState({view: 'weekly'})}
-                disabled={chart === 'global'} // remove this after pulling initial info for global
               >
                 Weekly
               </button>
