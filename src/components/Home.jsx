@@ -36,8 +36,8 @@ class Home extends React.Component {
       activeID: -1,
       activeTrackInfo: {},
       isModalOpen: false,
-      view: 'daily',
-      chart: 'usa',
+      view: 'weekly',
+      chart: 'global',
     }
 
     this.openModal = this.openModal.bind(this);
