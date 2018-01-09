@@ -20,15 +20,8 @@ const USA_PATH = '../track_data/usa';
 const global_weekly_dates = require(`${GLOBAL_PATH}/weekly/dates.json`);
 const global_weekly_ranks_path = `${GLOBAL_PATH}/weekly/ranks`;
 
-const global_daily_dates = require(`${GLOBAL_PATH}/daily/dates.json`);
-const global_daily_ranks_path = `${GLOBAL_PATH}/daily/ranks`;
-
 const usa_weekly_dates = require(`${USA_PATH}/weekly/dates.json`);
 const usa_weekly_ranks_path = `${USA_PATH}/weekly/ranks`;
-
-const usa_daily_dates = require(`${USA_PATH}/daily/dates.json`);
-const usa_daily_ranks_path = `${USA_PATH}/daily/ranks`;
-
 
 var collectRanks = (chart, view) => {
 
@@ -38,6 +31,7 @@ var collectRanks = (chart, view) => {
 
     if (_.isEmpty(dateArray)) {
         console.log(`${view} ${chart} does not have any dates`);
+        return false;
     }
 
     for (let i = 0; i < dateArray.length; i++) {
@@ -66,7 +60,7 @@ var collectRanks = (chart, view) => {
                 trackFile.push(data);
                 saveFile(file, trackFile);
                 console.log(`${trackID} has been saved for ${date}`);
-            
+                
             } else {
                 console.log(`${trackID} already contains a rank for ${date}`);
             }
@@ -97,9 +91,7 @@ var saveFile = (file, fileJSON) => {
 }
 
 collectRanks('usa', 'weekly');
-collectRanks('usa', 'daily');
 collectRanks('global', 'weekly');
-collectRanks('global', 'daily');
 
 module.exports = {
     collectRanks
