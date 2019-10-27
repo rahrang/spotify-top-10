@@ -1,0 +1,11 @@
+type Transaction {
+  id          ID       @id
+  createdAt   DateTime @createdAt
+  updatedAt   DateTime @updatedAt
+  user        User     @relation(link: INLINE)
+  dateTime    DateTime
+  vendor      String
+  category    String[]
+  description String
+  card        String
+}

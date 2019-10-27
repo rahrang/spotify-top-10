@@ -1,0 +1,8 @@
+type User {
+  id: ID @id
+  createdAt: DateTime @createdAt
+  updatedAt: DateTime @updatedAt
+  email:  String @unique
+  name: String
+  transactions: Transaction[] @relation(name: "TransactionsByUser", onDelete: CASCADE)
+}
